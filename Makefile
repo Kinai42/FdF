@@ -6,7 +6,7 @@
 #    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/03 18:05:57 by dbauduin          #+#    #+#              #
-#    Updated: 2017/05/03 19:22:38 by dbauduin         ###   ########.fr        #
+#    Updated: 2017/05/04 17:42:35 by dbauduin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ SOURCE	= fdf.c
 OBJS	= $(SRCS:.c=.o)
 
 
-RED		=	@echo "\033[31m✗ Clean\n\033[0m"
-GREEN	=	@echo "\033[32m✓ Compile\033[0m"
+RED		=	@echo "\033[32m[✓] FdF -> Clean\n\033[0m"
+GREEN	=	@echo "\033[32m[✓] FdF -> Compile\033[0m"
 
 all: $(NAME)
 

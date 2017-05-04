@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 16:14:40 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/03 20:02:50 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/03 20:22:00 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ int	main()
 	while (y < 700)
 	{
 		x = 299;
-		while (++x < 700)
+		while (++x <= 700)
 		{
 			mlx_pixel_put(mlx, win, x, y, 0x00DF1F1F);
 			if (x % 50 == 0)
 			{
 				while (y < 700)
+				{
 					mlx_pixel_put(mlx, win, x, y, 0x00DF1F1F);
-			}	
-			y = y + 50;
+					y++;
+				}	
+			}
+			y = 250;
 		}
 	}
 	mlx_loop(mlx);
