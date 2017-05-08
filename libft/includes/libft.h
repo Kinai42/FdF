@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 03:06:30 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/03 17:57:26 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/08 21:12:35 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void				ft_strclr(char *s);
 void				ft_strdel(char **as);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
+int					ft_tablen(char **tab);
 int					get_next_line(const int fd, char **line);
 
 #endif

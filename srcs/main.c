@@ -1,43 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 16:14:40 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/03 20:22:00 by dbauduin         ###   ########.fr       */
+/*   Created: 2017/05/08 19:51:45 by dbauduin          #+#    #+#             */
+/*   Updated: 2017/05/08 21:04:08 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "fdf.h"
 
-int	main()
+#include <unistd.h>
+
+int				main(int ac, char **av)
 {
-	void	*mlx;
-	void	*win;
-	int		x;
-	int		y;
+	t_fdf	*fdf;
 
-	y = 250;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 1000, 1000, "title");
-	while (y < 700)
+	if (ac != 2)
 	{
-		x = 299;
-		while (++x <= 700)
-		{
-			mlx_pixel_put(mlx, win, x, y, 0x00DF1F1F);
-			if (x % 50 == 0)
-			{
-				while (y < 700)
-				{
-					mlx_pixel_put(mlx, win, x, y, 0x00DF1F1F);
-					y++;
-				}	
-			}
-			y = 250;
-		}
+		write(1, "FdF need a file in parametre\n", 29);
+		return (0);
 	}
-	mlx_loop(mlx);
+	if (!(fdf = ft_setup(av[1])))
+		return (0);
+	start_fdf(fdf);
+	return (0);
 }

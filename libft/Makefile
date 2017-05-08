@@ -6,7 +6,7 @@
 #    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/16 02:53:24 by dbauduin          #+#    #+#              #
-#    Updated: 2017/05/03 19:26:19 by dbauduin         ###   ########.fr        #
+#    Updated: 2017/05/08 21:10:56 by dbauduin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ SRC		=	get_next_line.c\
 			ft_isupper.c\
 			ft_islower.c\
 			ft_str_capitalize.c\
+			ft_tablen.c\
 
 OBJ		=	$(subst .c,.o,$(SRC))
 
