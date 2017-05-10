@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 19:55:59 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/08 21:33:34 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/10 03:11:43 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,34 +62,43 @@ int				newline(t_fdf *fdf, char *line)
 	int		i;
 
 	i = 0;
-	if (!(tab = ft_strsplit(line, ' ')) || ft_tablen(tab) == 0)
+	if (!(tab = ft_strsplit(line, ' ')))
 		return (0);
-	fdf->width == 0 ? fdf->width = ft_tablen(tab) : 0;
+	fdf->width = ft_tablen(tab);
+	printf("%d\n", fdf->width);
+	fdf->height++;
+	if (!(fdf->tab = (int *)malloc(sizeof(int) * fdf->height)))
+	return (0);
+	printf("ok2\n");
 	while (tab[i])
 	{
-		if (!ft_atoi_check(&alt, tab[i]) || !(fdf->tab = insert_tab(alt_tab, fdf->tab, fdf->size)))
+		if (!ft_atoi_check(&alt_map, tab[i]) || !(fdf->tab = insert_tab(alt_map, fdf->tab, fdf->width)))
 			return (0);
 		free(tab[i++]);
-		fdf->size++;
 	}
 	free(tab);
 	return (1);
 }
 
-t_fdf			*init(void)
+t_fdf			*init(int fd)
 {
 	t_fdf	*fdf;
 
 	if (!(fdf = malloc(sizeof(t_fdf))))
 		return (0);
-	fdf->size = 0;
+	fdf->width = 0;
+	fdf->height = ft_height_map(fd);
 	fdf->x = 0;
 	fdf->y = 0;
-	fdf->posx = 0;
-	fdf->posy = 0;
+	fdf->pas = 10;
+	fdf->origin_x = 0;
+	fdf->origin_y = 0;
 	fdf->colors[0] = RED;
 	fdf->colors[1] = GREEN;
 	fdf->colors[2] = BLUE;
+	fdf->a = 32;
+	fdf->b = 4 * SCREEN_X;
+	fdf->c = 0;
 	return (fdf);
 }
 
@@ -99,11 +108,12 @@ t_fdf			*ft_setup(char *str)
 	int		fd;
 	char	*line;
 
-	if ((fd = open(str, O_RDONLY)) == -1 ||	!(fdf = init()))
+	if ((fd = open(str, O_RDONLY)) == -1 ||	!(fdf = init(fd)))
 	{
 		write (1,"error", 5);	
 		return (0);
 	}
+	printf("ok1\n");
 	while (get_next_line(fd, &line))
 	{
 		if (!newline(fdf, line))
@@ -114,7 +124,7 @@ t_fdf			*ft_setup(char *str)
 		free(line);
 	}
 	free(line);
-	!fdf->size ? write(1, "FdF: map invalid\n", 17) : 0;
-	return (fdf->size ? fdf : 0);
+	!fdf->width ? write(1, "FdF: map invalid\n", 17) : 0;
+	return (fdf->width ? fdf : 0);
 }
 

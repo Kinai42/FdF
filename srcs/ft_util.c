@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 16:14:40 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/05 19:20:00 by dbauduin         ###   ########.fr       */
+/*   Created: 2017/05/10 02:38:52 by dbauduin          #+#    #+#             */
+/*   Updated: 2017/05/10 02:44:59 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "fdf.h"
+#include <fcntl.h>
 
-int	main()
+int	ft_height_map(int fd)
 {
-	t_fdf	*fdf;
+	char	c;
+	int		height;
 
-	fdf->mlx = mlx_init();
-	fdf->win = mlx_new_window(fdf->mlx, SCREEN_X, SCREEN_Y, "title");
-	mlx_string_put(fdf->mlx, fdf->win, 2, 2, 0x00FF0000, "FDF PROJECT");
-	mlx_key_hook(fdf->win, close_win, fdf);
-	mlx_loop(fdf->mlx);
-	free (fdf);
-	return (0);
+	height = 1;
+while (read(fd, &c, 1))
+{
+	if (c == '\n')
+		height++;
+}
+	return (height);
 }

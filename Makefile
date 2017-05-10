@@ -6,7 +6,7 @@
 #    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/03 18:05:57 by dbauduin          #+#    #+#              #
-#    Updated: 2017/05/08 21:00:39 by dbauduin         ###   ########.fr        #
+#    Updated: 2017/05/10 02:43:26 by dbauduin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME = FDF
 OBJ =	objs/main.o\
 		objs/setup.o\
 		objs/act_windows.o\
+		objs/print_map.o\
+		objs/ft_util.o\
 
 all: $(NAME)
 
@@ -38,4 +40,4 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-re: fclean all]]]]"
+re: fclean all
