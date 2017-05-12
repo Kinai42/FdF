@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 19:42:09 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/12 03:38:15 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/12 05:49:25 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # include <stdio.h>
 
-# define SCREEN_X 1000
+# define SCREEN_X 1500
 # define SCREEN_Y 1000
 
 # define RED	0xff0000
@@ -52,7 +52,7 @@ typedef struct		s_fdf
 
 }					t_fdf;
 
-//int		act_win(int keycode, void *param);
+int		act_windows(int keycode, void *param);
 void	start_fdf(t_fdf *fdf, char *av);
 t_fdf	*ft_setup(char *av);
 t_fdf	*ft_init(char *av);
@@ -61,12 +61,11 @@ int		ft_atoi_check(char *tab);
 int		*insert_tab(int alt_map, int *tab, int size);
 
 
-
-//void	coord(t_fdf *fdf);
-int		print_map(t_fdf *fdf);
+void	coord(t_fdf *fdf);
+int		print_line_x(t_fdf *fdf);
 int		draw_line(t_fdf *fdf, int r, int g, int b);
 void	pixel_put(char *pixel, int x, int y, int color);
 int		ft_height_map(char *av);
-void	menu(t_fdf *fdf);
+void	ft_menu(t_fdf *fdf);
 
 # endif

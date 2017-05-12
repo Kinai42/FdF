@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 21:45:07 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/12 00:57:51 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/12 06:56:36 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ t_fdf	*ft_init(char *av)
 	fdf->height = ft_height_map(av);
 	if (!(fdf->tab = (int **)malloc(sizeof(int *) * (fdf->height))))
 		return (0);
+	fdf->endian[0] = 32;
+	fdf->endian[1] = 4 * SCREEN_X;
+	fdf->endian[2] = 0;
 	return (fdf);
 }
 
@@ -64,21 +67,21 @@ int				ft_atoi_check(char *str)
 
 int				newline(t_fdf *fdf, char *line, int y)
 {
-	char	**tab;
+	char	**tab_char;
 	int		alt_map;
 	int		i;
 
 	i = 0;
-	if (!(tab = ft_strsplit(line, ' ')))
+	if (!(tab_char = ft_strsplit(line, ' ')))
 		return (0);
-	fdf->width = ft_tablen(tab);
-	while (tab[i])
+	fdf->width = ft_tablen(tab_char);
+	while (tab_char[i])
 	{
-		alt_map = ft_atoi_check(tab[i]);
+		alt_map = ft_atoi_check(tab_char[i]);
 		fdf->tab[y] = insert_tab(alt_map, fdf->tab[y], i);
-		free(tab[i++]);
+		free(tab_char[i++]);
 	}
-	free(tab);
+	free(tab_char);
 	return (1);
 }
 
