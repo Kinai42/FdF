@@ -6,20 +6,19 @@
 #    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/16 02:53:24 by dbauduin          #+#    #+#              #
-#    Updated: 2017/05/08 21:10:56 by dbauduin         ###   ########.fr        #
+#    Updated: 2017/05/11 22:52:33 by dbauduin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	gcc
 
-CFLAGS	=	-I./includes -Wall -Werror -Wextra
+FLAGS	=	-I./include -Wall -Werror -Wextra
 
 RM		=	/bin/rm
 
 NAME	=	libft.a
 
-SRC		=	get_next_line.c\
-			ft_isalpha.c\
+SRC		=	ft_isalpha.c\
 			ft_isalnum.c\
 			ft_isascii.c\
 			ft_isprint.c\
@@ -84,19 +83,22 @@ SRC		=	get_next_line.c\
 			ft_islower.c\
 			ft_str_capitalize.c\
 			ft_tablen.c\
+			Get_next_line.c\
 
 OBJ		=	$(subst .c,.o,$(SRC))
 
 $(NAME)	:
-	@$(CC) -c $(CFLAGS) $(SRC)
+	@$(CC) -I ./includes -c $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@$(RM) -f $(OBJ)
+	@rm $(OBJ)
+	@echo "\033[32mLibft compiled	[ ✔ ]\033[0m"
 
 all		:	$(NAME)
 
 clean	:
 	@$(RM) -rf $(OBJ)
+	@echo "\033[32mLibft cleaned	[ ✔ ]\033[0m"
 
 fclean	:	clean
 	@$(RM) -rf $(NAME)

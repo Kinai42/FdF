@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/03 18:05:57 by dbauduin          #+#    #+#              #
-#    Updated: 2017/05/10 02:43:26 by dbauduin         ###   ########.fr        #
+#    Updated: 2017/05/12 01:53:19 by dbauduin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = FDF
 
 OBJ =	objs/main.o\
 		objs/setup.o\
-		objs/act_windows.o\
-		objs/print_map.o\
 		objs/ft_util.o\
+		objs/print_map.o\
+		objs/windows.o\
 
 all: $(NAME)
 

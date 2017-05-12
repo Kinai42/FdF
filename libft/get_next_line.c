@@ -6,17 +6,17 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 04:48:54 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/03 17:58:48 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/11 23:59:04 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_slot	*get_slot(t_slot *s, int fd)
+static t_slot	*get_slot(t_slot *first, int fd)
 {
 	t_slot	*slot;
 
-	slot = s;
+	slot = first;
 	while (slot && slot->fd != fd)
 		slot = slot->next;
 	if (!slot)
@@ -26,59 +26,62 @@ static t_slot	*get_slot(t_slot *s, int fd)
 			return (0);
 		slot->fd = fd;
 		slot->next = NULL;
-		while (s && s->next)
-			s = s->next;
-		if (s)
-			s->next = slot;
+		while (first && first->next)
+			first = first->next;
+		if (first)
+			first->next = slot;
 	}
 	return (slot);
 }
 
-static int		save(t_slot *slot, char **tmp, char ***line)
+static int		process_slot(t_slot *slot, char **line)
 {
-	if (!(*tmp = ft_strdup(slot->save)))
+	char	*tmp;
+	char	*new;
+
+	if (!(tmp = ft_strdup(slot->save)))
 		return (-1);
-	if (**tmp == '\n')
+	free(slot->save);
+	if (*tmp == '\n')
 	{
-		free(slot->save);
-		slot->save = ft_strdup(*tmp + 1);
-		free(*tmp);
-		**line = ft_strnew(0);
+		if (!(slot->save = ft_strdup(tmp + 1)) ||
+				!(*line = ft_strnew(0)))
+			return (-1);
+		free(tmp);
 		return (1);
 	}
-	free(slot->save);
-	slot->save = ft_strchr(*tmp, '\n') ?
-		ft_strdup(ft_strchr(*tmp, '\n') + 1) : ft_strnew(0);
-	if (ft_strchr(*tmp, '\n'))
-		*ft_strchr(*tmp, '\n') = '\0';
-	**line = *tmp;
-	return (0);
+	if (!(slot->save = ft_strchr(tmp, '\n') ?
+				ft_strdup(ft_strchr(tmp, '\n') + 1) : ft_strnew(0)))
+		return (-1);
+	if (ft_strchr(tmp, '\n'))
+		*ft_strchr(tmp, '\n') = '\0';
+	if (!(new = *tmp ? tmp : ft_strnew(0)))
+		return (-1);
+	*line = new;
+	if (new != tmp)
+		free(tmp);
+	return (*new ? 1 : 0);
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_slot		*s;
-	t_slot				*slot;
-	char				buf[BUFF_SIZE + 1];
-	int					st;
-	char				*tmp;
+	static t_slot	*first;
+	t_slot			*slot;
+	int				rd;
+	char			buff[BUFF_SIZE + 1];
+	char			*tmp;
 
-	if (!line || !(slot = get_slot(s, fd)))
+	if (!line || !(slot = get_slot(first, fd)))
 		return (-1);
-	s = s ? s : slot;
-	while ((st = read(fd, buf, BUFF_SIZE)))
+	first = first ? first : slot;
+	while ((rd = read(fd, buff, BUFF_SIZE)) && rd != -1)
 	{
-		if (st == -1)
-			return (-1);
-		buf[st] = '\0';
-		tmp = ft_strjoin(slot->save, buf);
+		buff[rd] = '\0';
+		tmp = ft_strjoin(slot->save, buff);
 		free(slot->save);
-		slot->save = ft_strdup(tmp);
-		free(tmp);
+		slot->save = tmp;
 		if (ft_strchr(slot->save, '\n'))
-			break ;
+			return (process_slot(slot, line));
 	}
-	if (save(slot, &tmp, &line))
-		return (1);
-	return (!!(*tmp));
+	return (rd == -1 ? -1 : process_slot(slot, line));
 }
