@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/12 07:15:52 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/14 08:32:11 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,24 @@ int		print_line_x(t_fdf *fdf)
 	{
 		w = 0;
 		fdf->o_x = fdf->origin_x - (20 * h);
-		fdf->o_y = fdf->origin_y + (20 * h);
-	//	printf("->%d, %d\n", fdf->o_x, fdf->o_y);
+		fdf->o_y = fdf->origin_y + (20 * h) ;
 		while (w < fdf->width)
 		{
 			fdf->d_x = fdf->o_x + 20;
 			fdf->d_y = fdf->o_y + 20 - (2 * (fdf->tab[h][w]));
-		printf("-->%d, %d\n", fdf->tab[h][w], w);
 			if (fdf->tab[h][w] == 0)
 				draw_line(fdf, 255, 0, 255);
-			if (fdf->tab[h][w] < 0)
-				draw_line(fdf, 255, 255, 255);
-			if (fdf->tab[h][w] > 0)
-				draw_line(fdf, 255, 255, 255);
 			fdf->o_x = fdf->d_x;
 			fdf->o_y = fdf->d_y;
 			w++;
 		}
 	}
 	return (0);
+}
+
+int		prnt_line_y(f_fdf * fdf)
+{
+
 }
 
 int		draw_line(t_fdf *fdf, int r, int g, int b)

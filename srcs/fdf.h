@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 19:42:09 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/12 05:49:25 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/14 08:16:52 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct		s_fdf
 	int		o_y; //coordonnees axe y
 	int		d_x;
 	int		d_y;
+	int		d_x2;
+	int		d_y2;
 	
 	int		origin_x; // pixel de depart de l'impression de la map en x
 	int		origin_y; // pixel de depart de l'impression de la map en x
