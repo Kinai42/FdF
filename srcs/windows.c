@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 01:30:26 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/12 06:34:41 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/15 10:43:51 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void		start_fdf(t_fdf *fdf, char *av)
 		ft_menu(fdf);
 		coord(fdf);
 		print_line_x(fdf);
+		print_line_y(fdf);
 		mlx_key_hook(fdf->win, act_windows, fdf);
 		mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->image, 0, 0);
 		mlx_string_put(fdf->mlx, fdf->win, 2, 2, 0x00FFFFFF, "MENU");
+		mlx_string_put(fdf->mlx, fdf->win, 2, 20, 0x00FFFFFF, "ZOOM");
 		mlx_string_put(fdf->mlx, fdf->win, SCREEN_X - 100, SCREEN_Y - 30, 0x00FFFFFF, "DBAUDUIN");
 		mlx_loop(fdf->mlx);
 		free (fdf);
@@ -37,13 +39,13 @@ void	ft_menu(t_fdf *fdf)
 	int i;
 
 	i = -1;
-	while (++i < 255)
+	while (++i < 255 * 1.5)
 	{
 		fdf->o_x = i;
 		fdf->o_y = 0;
 		fdf->d_x = i;
 		fdf->d_y = SCREEN_Y;
-		draw_line(fdf, 255 - i, 0, 255 - i);
+		draw_line(fdf, 255 - i / 1.5, 0, 0);
 	}
 }
 

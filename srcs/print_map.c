@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/14 08:32:11 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/15 10:44:27 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	coord(t_fdf *fdf)
 	int		i;
 
 	i = 0;
-	fdf->origin_x = ((SCREEN_X / 2) - (fdf->width / 2)) + 255;
-	fdf->origin_y = 20;
+	fdf->origin_x = ((SCREEN_X / 2) - (fdf->width / 2)) + 100;
+	fdf->origin_y = 100;
 }
 
 int		print_line_x(t_fdf *fdf)
@@ -33,14 +33,16 @@ int		print_line_x(t_fdf *fdf)
 	while (++h < fdf->height)
 	{
 		w = 0;
-		fdf->o_x = fdf->origin_x - (20 * h);
-		fdf->o_y = fdf->origin_y + (20 * h) ;
-		while (w < fdf->width)
+		fdf->o_x = fdf->origin_x - (25 * h);
+		fdf->o_y = fdf->origin_y + (20 * h) - (3 * fdf->tab[h][w]);
+		while (w < fdf->width - 1)
 		{
-			fdf->d_x = fdf->o_x + 20;
-			fdf->d_y = fdf->o_y + 20 - (2 * (fdf->tab[h][w]));
-			if (fdf->tab[h][w] == 0)
-				draw_line(fdf, 255, 0, 255);
+			fdf->d_x = fdf->o_x + 25;
+			if (w == 0)
+				fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h][w + 1]));
+			else
+				fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h][w + 1] - fdf->tab[h][w]));
+			draw_line(fdf, 255, 0, 0);
 			fdf->o_x = fdf->d_x;
 			fdf->o_y = fdf->d_y;
 			w++;
@@ -49,9 +51,33 @@ int		print_line_x(t_fdf *fdf)
 	return (0);
 }
 
-int		prnt_line_y(f_fdf * fdf)
+int		print_line_y(t_fdf *fdf)
 {
+	int		h;
+	int		w;
 
+	h = 0;
+	w = -1;
+	while (++w < fdf->width)
+	{
+		h = 0;
+		fdf->o_x = fdf->origin_x + (25 * w);
+		fdf->o_y = fdf->origin_y + (20 * w) - (3 * fdf->tab[h][w]);
+		while (h < fdf->height - 1)
+		{
+			fdf->d_x = fdf->o_x - 25;
+			fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h + 1][w]));
+		if (h == 0 && w > 0)
+			fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h + 1][w]));
+		else if (h != 0 && w > 0)
+				fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h + 1][w] - fdf->tab[h][w]));
+			draw_line(fdf, 255, 255, 0);
+			fdf->o_x = fdf->d_x;
+			fdf->o_y = fdf->d_y;
+			h++;
+		}
+	}
+	return (0);
 }
 
 int		draw_line(t_fdf *fdf, int r, int g, int b)

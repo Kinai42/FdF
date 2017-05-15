@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 19:42:09 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/14 08:16:52 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/15 10:04:48 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # include <stdio.h>
 
-# define SCREEN_X 1500
+# define SCREEN_X 1250
 # define SCREEN_Y 1000
 
 # define RED	0xff0000
@@ -65,6 +65,7 @@ int		*insert_tab(int alt_map, int *tab, int size);
 
 void	coord(t_fdf *fdf);
 int		print_line_x(t_fdf *fdf);
+int		print_line_y(t_fdf*fdf);
 int		draw_line(t_fdf *fdf, int r, int g, int b);
 void	pixel_put(char *pixel, int x, int y, int color);
 int		ft_height_map(char *av);
