@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 01:30:26 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/15 10:43:51 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/18 09:58:55 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void		start_fdf(t_fdf *fdf, char *av)
 		coord(fdf);
 		print_line_x(fdf);
 		print_line_y(fdf);
-		mlx_key_hook(fdf->win, act_windows, fdf);
 		mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->image, 0, 0);
 		mlx_string_put(fdf->mlx, fdf->win, 2, 2, 0x00FFFFFF, "MENU");
-		mlx_string_put(fdf->mlx, fdf->win, 2, 20, 0x00FFFFFF, "ZOOM");
+		mlx_string_put(fdf->mlx, fdf->win, 2, 40, 0x00FFFFFF, "ZOOM");
 		mlx_string_put(fdf->mlx, fdf->win, SCREEN_X - 100, SCREEN_Y - 30, 0x00FFFFFF, "DBAUDUIN");
+		mlx_key_hook(fdf->win, act_windows, fdf);
+	//	system("aplay ./scrs/son.mp3 & ");
 		mlx_loop(fdf->mlx);
 		free (fdf);
 	}
@@ -47,6 +48,11 @@ void	ft_menu(t_fdf *fdf)
 		fdf->d_y = SCREEN_Y;
 		draw_line(fdf, 255 - i / 1.5, 0, 0);
 	}
+	fdf->o_x = 0;
+	fdf->o_y = 25;
+	fdf->d_x = SCREEN_X;
+	fdf->d_y = 25;
+	draw_line(fdf, 255, 255, 255);
 }
 
 int			act_windows(int keycode, void *param)

@@ -6,13 +6,15 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/15 10:44:27 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/18 12:28:33 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "fdf.h"
 #include <math.h>
+
+#define G 7
 
 void	coord(t_fdf *fdf)
 {
@@ -29,20 +31,16 @@ int		print_line_x(t_fdf *fdf)
 	int		w;
 
 	h = -1;
-	w = 0;
 	while (++h < fdf->height)
 	{
 		w = 0;
 		fdf->o_x = fdf->origin_x - (25 * h);
-		fdf->o_y = fdf->origin_y + (20 * h) - (3 * fdf->tab[h][w]);
+		fdf->o_y = fdf->origin_y + (20 * h) - (G * fdf->tab[h][w]);
 		while (w < fdf->width - 1)
 		{
 			fdf->d_x = fdf->o_x + 25;
-			if (w == 0)
-				fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h][w + 1]));
-			else
-				fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h][w + 1] - fdf->tab[h][w]));
-			draw_line(fdf, 255, 0, 0);
+			fdf->d_y = (fdf->o_y + 20) - (G * (fdf->tab[h][w + 1] - fdf->tab[h][w]));
+			draw_line(fdf, 0, 100, 0);
 			fdf->o_x = fdf->d_x;
 			fdf->o_y = fdf->d_y;
 			w++;
@@ -62,16 +60,12 @@ int		print_line_y(t_fdf *fdf)
 	{
 		h = 0;
 		fdf->o_x = fdf->origin_x + (25 * w);
-		fdf->o_y = fdf->origin_y + (20 * w) - (3 * fdf->tab[h][w]);
+		fdf->o_y = fdf->origin_y + (20 * w) - (G * fdf->tab[h][w]);
 		while (h < fdf->height - 1)
 		{
 			fdf->d_x = fdf->o_x - 25;
-			fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h + 1][w]));
-		if (h == 0 && w > 0)
-			fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h + 1][w]));
-		else if (h != 0 && w > 0)
-				fdf->d_y = fdf->o_y + 20 - (3 * (fdf->tab[h + 1][w] - fdf->tab[h][w]));
-			draw_line(fdf, 255, 255, 0);
+			fdf->d_y = fdf->o_y + 20 - (G * (fdf->tab[h + 1][w] - fdf->tab[h][w]));
+			draw_line(fdf, 100, 0, 0);
 			fdf->o_x = fdf->d_x;
 			fdf->o_y = fdf->d_y;
 			h++;
@@ -82,8 +76,8 @@ int		print_line_y(t_fdf *fdf)
 
 int		draw_line(t_fdf *fdf, int r, int g, int b)
 {
-	int			i;
-	int			distance;
+	double		i;
+	double		distance;
 	double		ratio;
 	int			X;
 	int			Y;
@@ -92,12 +86,12 @@ int		draw_line(t_fdf *fdf, int r, int g, int b)
 	distance = sqrt(pow((fdf->d_x - fdf->o_x), 2) + pow((fdf->d_y - fdf->o_y), 2));
 	while (i < distance)
 	{
-		ratio = (double)i / (double)distance;
+		ratio = i / distance;
 		X = fdf->o_x + (fdf->d_x - fdf->o_x) * ratio;
 		Y = fdf->o_y + (fdf->d_y - fdf->o_y) * ratio;
 		if (X >= 0 && X < SCREEN_X && Y >= 0 && Y < SCREEN_Y)
 			pixel_put(fdf->pixel, X, Y, (b << 16) + (g << 8) + (r));
-		i++;
+		i += 0.1;
 	}
 	return (0);
 }
