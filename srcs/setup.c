@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 21:45:07 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 18:26:58 by craffate         ###   ########.fr       */
+/*   Updated: 2017/05/19 18:58:25 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,8 @@ t_fdf		*ft_setup(char *av)
 	}
 	if (!(fdf->tab = (int **)malloc(sizeof(int *) * fdf->height)))
 		return (0);
-	ft_putchar('a');
 	if (!ft_setup2((const int)fd, &line, fdf))
 		return (0);
-	ft_putchar('a');
 	coord(fdf);
 	free(line);
 	!fdf->width ? write(1, "FdF: map invalid\n", 17) : 0;

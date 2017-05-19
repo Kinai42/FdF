@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 01:30:26 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 18:23:15 by craffate         ###   ########.fr       */
+/*   Updated: 2017/05/19 18:41:13 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,20 @@ int			act_windows(int keycode, void *param)
 
 void		ft_header(t_fdf *fdf)
 {
+	char	*s;
+
+	s = ft_itoa(fdf->zoom);
 	mlx_string_put(fdf->mlx, fdf->win, 2, 2, 0x00FFFFFF, "MENU");
 	mlx_string_put(fdf->mlx, fdf->win, 2, 40, 0x00FFFFFF, "HEIGHT :");
-	mlx_string_put(fdf->mlx, fdf->win, 90, 41, 0x00FFFFFF, ft_itoa(fdf->zoom));
+	mlx_string_put(fdf->mlx, fdf->win, 90, 41, 0x00FFFFFF, s);
+	free(s);
 	mlx_string_put(fdf->mlx, fdf->win, 2, 78, 0x00FFFFFF, "ORIGIN X :");
-	mlx_string_put(fdf->mlx, fdf->win, 110, 77, C, ft_itoa(fdf->origin_x));
+	s = ft_itoa(fdf->origin_x);
+	mlx_string_put(fdf->mlx, fdf->win, 110, 77, C, s);
+	free(s);
 	mlx_string_put(fdf->mlx, fdf->win, 2, 96, C, "ORIGIN Y :");
-	mlx_string_put(fdf->mlx, fdf->win, 110, 97, C, ft_itoa(fdf->origin_y));
+	s = ft_itoa(fdf->origin_y);
+	mlx_string_put(fdf->mlx, fdf->win, 110, 97, C, s);
+	free(s);
 	ft_header2(fdf);
 }
