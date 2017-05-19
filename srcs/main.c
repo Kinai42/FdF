@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 19:51:45 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/12 02:06:55 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 05:38:51 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int				main(int ac, char **av)
 		write(1, "FDF : read file error\n",21);
 		return (0);
 	}
-	start_fdf(fdf, av[1]);
+	system("afplay ./srcs/son.mp3 & ");
+	fdf->mlx = mlx_init();
+	fdf->win = mlx_new_window(fdf->mlx, SCREEN_X, SCREEN_Y, av[1]);
+	start_fdf(fdf, 0, 0, 0);
 	return (0);
 }

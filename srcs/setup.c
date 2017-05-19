@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 21:45:07 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/12 06:56:36 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 04:18:29 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_fdf	*ft_init(char *av)
 		return (0);
 	fdf->width = 0;
 	fdf->height = ft_height_map(av);
+	fdf->zoom = 3;
+	fdf->theme = 1;
 	if (!(fdf->tab = (int **)malloc(sizeof(int *) * (fdf->height))))
 		return (0);
 	fdf->endian[0] = 32;
@@ -110,6 +112,7 @@ t_fdf			*ft_setup(char *av)
 		y++;
 		free(line);
 	}
+	coord(fdf);
 	free(line);
 	!fdf->width ? write(1, "FdF: map invalid\n", 17) : 0;
 	return (fdf->width ? fdf : 0);

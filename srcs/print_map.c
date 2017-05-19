@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/18 12:28:33 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 06:36:47 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,35 @@
 #include "fdf.h"
 #include <math.h>
 
-#define G 7
 
 void	coord(t_fdf *fdf)
 {
 	int		i;
 
 	i = 0;
-	fdf->origin_x = ((SCREEN_X / 2) - (fdf->width / 2)) + 100;
-	fdf->origin_y = 100;
+	fdf->origin_x = ((SCREEN_X / 2) - (fdf->width / 2)) + 150;
+	fdf->origin_y = 50;
 }
 
 int		print_line_x(t_fdf *fdf)
 {
 	int		h;
 	int		w;
+	int		pas;
 
 	h = -1;
+	pas = fdf->width;
+	fdf->height > fdf->width ? pas = fdf->height : 0;
 	while (++h < fdf->height)
 	{
 		w = 0;
-		fdf->o_x = fdf->origin_x - (25 * h);
-		fdf->o_y = fdf->origin_y + (20 * h) - (G * fdf->tab[h][w]);
+		fdf->o_x = fdf->origin_x - (475 / pas * h);
+		fdf->o_y = fdf->origin_y + (399 / pas * h) - (fdf->zoom * fdf->tab[h][w]);
 		while (w < fdf->width - 1)
 		{
-			fdf->d_x = fdf->o_x + 25;
-			fdf->d_y = (fdf->o_y + 20) - (G * (fdf->tab[h][w + 1] - fdf->tab[h][w]));
-			draw_line(fdf, 0, 100, 0);
+			fdf->d_x = fdf->o_x + 475 / pas;
+			fdf->d_y = (fdf->o_y + 399 / pas) - (fdf->zoom * (fdf->tab[h][w + 1] - fdf->tab[h][w]));
+			get_colors_x(fdf, h, w);
 			fdf->o_x = fdf->d_x;
 			fdf->o_y = fdf->d_y;
 			w++;
@@ -53,19 +55,21 @@ int		print_line_y(t_fdf *fdf)
 {
 	int		h;
 	int		w;
+	int		pas;
 
-	h = 0;
 	w = -1;
+	pas = fdf->width;
+	fdf->height > fdf->width ? pas = fdf->height : 0;
 	while (++w < fdf->width)
 	{
 		h = 0;
-		fdf->o_x = fdf->origin_x + (25 * w);
-		fdf->o_y = fdf->origin_y + (20 * w) - (G * fdf->tab[h][w]);
+		fdf->o_x = fdf->origin_x + (475 / pas * w);
+		fdf->o_y = fdf->origin_y + (399 / pas * w) - (fdf->zoom * fdf->tab[h][w]);
 		while (h < fdf->height - 1)
 		{
-			fdf->d_x = fdf->o_x - 25;
-			fdf->d_y = fdf->o_y + 20 - (G * (fdf->tab[h + 1][w] - fdf->tab[h][w]));
-			draw_line(fdf, 100, 0, 0);
+			fdf->d_x = fdf->o_x - 475 / pas;
+			fdf->d_y = fdf->o_y + 399 / pas - (fdf->zoom * (fdf->tab[h + 1][w] - fdf->tab[h][w]));
+			get_colors_y(fdf, h, w);
 			fdf->o_x = fdf->d_x;
 			fdf->o_y = fdf->d_y;
 			h++;
@@ -89,7 +93,7 @@ int		draw_line(t_fdf *fdf, int r, int g, int b)
 		ratio = i / distance;
 		X = fdf->o_x + (fdf->d_x - fdf->o_x) * ratio;
 		Y = fdf->o_y + (fdf->d_y - fdf->o_y) * ratio;
-		if (X >= 0 && X < SCREEN_X && Y >= 0 && Y < SCREEN_Y)
+		if (X >= 350 && X < SCREEN_X && Y >= 0 && Y < SCREEN_Y)
 			pixel_put(fdf->pixel, X, Y, (b << 16) + (g << 8) + (r));
 		i += 0.1;
 	}
