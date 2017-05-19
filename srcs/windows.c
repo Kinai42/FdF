@@ -6,16 +6,19 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 01:30:26 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 06:35:05 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 07:15:03 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+#define C 0x00FFFFFF
+
 void		start_fdf(t_fdf *fdf, double zoom, int x, int y)
 {
 	fdf->image = mlx_new_image(fdf->mlx, SCREEN_X, SCREEN_Y);
-	fdf->pixel = mlx_get_data_addr(fdf->image, &fdf->endian[0], &fdf->endian[1], &fdf->endian[2]);
+	fdf->pixel = mlx_get_data_addr(fdf->image, &fdf->endian[0],
+			&fdf->endian[1], &fdf->endian[2]);
 	ft_menu(fdf);
 	fdf->zoom += zoom;
 	fdf->origin_x += x;
@@ -27,10 +30,10 @@ void		start_fdf(t_fdf *fdf, double zoom, int x, int y)
 	mlx_key_hook(fdf->win, act_windows, fdf);
 	mlx_hook(fdf->win, 17, 17, leave_window, fdf);
 	mlx_loop(fdf->mlx);
-	free (fdf);
+	free(fdf);
 }
 
-void	draw(t_fdf *fdf)
+void		draw(t_fdf *fdf)
 {
 	mlx_clear_window(fdf->mlx, fdf->win);
 	ft_menu(fdf);
@@ -40,7 +43,7 @@ void	draw(t_fdf *fdf)
 	print_line_y(fdf);
 }
 
-void	ft_menu(t_fdf *fdf)
+void		ft_menu(t_fdf *fdf)
 {
 	int i;
 
@@ -86,19 +89,18 @@ void		ft_header(t_fdf *fdf)
 	mlx_string_put(fdf->mlx, fdf->win, 2, 40, 0x00FFFFFF, "HEIGHT :");
 	mlx_string_put(fdf->mlx, fdf->win, 90, 41, 0x00FFFFFF, ft_itoa(fdf->zoom));
 	mlx_string_put(fdf->mlx, fdf->win, 2, 78, 0x00FFFFFF, "ORIGIN X :");
-	mlx_string_put(fdf->mlx, fdf->win, 110, 77, 0x00FFFFFF, ft_itoa(fdf->origin_x));
-	mlx_string_put(fdf->mlx, fdf->win, 2, 96, 0x00FFFFFF, "ORIGIN Y :");
-	mlx_string_put(fdf->mlx, fdf->win, 110, 97, 0x00FFFFFF, ft_itoa(fdf->origin_y));
-	mlx_string_put(fdf->mlx, fdf->win, 2, 130, 0x00FFFFFF, "MOVE MAP : UP    OR    DOWN");
-	mlx_string_put(fdf->mlx, fdf->win, 2, 150, 0x00FFFFFF, "           LEFT  OR    RIGHT");
-	mlx_string_put(fdf->mlx, fdf->win, 2, 180, 0x00FFFFFF, "HEIGHT   :  +    OR      -");
-	mlx_string_put(fdf->mlx, fdf->win, 2, 96, 0x00FFFFFF, "");
-	mlx_string_put(fdf->mlx, fdf->win, SCREEN_X - 100, SCREEN_Y - 30, 0x00FFFFFF, "DBAUDUIN");
-	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 210, 0x00FFFFFF, "           :::      ::::::::");
-	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 180, 0x00FFFFFF, "         :+:      :+:    :+:");
-	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 150, 0x00FFFFFF, "       +:+ +:+         +:+");
-	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 120, 0x00FFFFFF, "     +#+  +:+       +#+");
-	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 90, 0x00FFFFFF, "    +#+#+#+#+#+   +#+");
-	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 60, 0x00FFFFFF, "         #+#    #+#");
-	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 30, 0x00FFFFFF, "        ###   ########");
+	mlx_string_put(fdf->mlx, fdf->win, 110, 77, C, ft_itoa(fdf->origin_x));
+	mlx_string_put(fdf->mlx, fdf->win, 2, 96, C, "ORIGIN Y :");
+	mlx_string_put(fdf->mlx, fdf->win, 110, 97, C, ft_itoa(fdf->origin_y));
+	mlx_string_put(fdf->mlx, fdf->win, 2, 130, C, "MOVE MAP : UP    OR    DOWN");
+	mlx_string_put(fdf->mlx, fdf->win, 2, 150, C, "           LEFT  OR    RIGHT");
+	mlx_string_put(fdf->mlx, fdf->win, 2, 180, C, "HEIGHT   :  +    OR      -");
+	mlx_string_put(fdf->mlx, fdf->win, SCREEN_X - 100, SCREEN_Y - 30, C, "DBAUDUIN");
+	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 210, C, "       :::      ::::::::");
+	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 180, C, "     :+:      :+:    :+:");
+	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 150, C, "   +:+ +:+         +:+");
+	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 120, C, " +#+  +:+       +#+");
+	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 90, C, "+#+#+#+#+#+   +#+");
+	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 60, C, "     #+#    #+#");
+	mlx_string_put(fdf->mlx, fdf->win, 10, SCREEN_Y - 30, C, "    ###   ########");
 }

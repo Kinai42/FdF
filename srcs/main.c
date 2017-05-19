@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 19:51:45 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 05:38:51 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 06:56:09 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				main(int ac, char **av)
 	}
 	if (!(fdf = ft_setup(av[1])))
 	{
-		write(1, "FDF : read file error\n",21);
+		write(1, "FDF : read file error\n", 21);
 		return (0);
 	}
 	system("afplay ./srcs/son.mp3 & ");

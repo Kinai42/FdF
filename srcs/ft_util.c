@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 02:38:52 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 06:35:57 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 07:01:36 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ void	get_colors_x(t_fdf *fdf, int h, int w)
 int		draw_line_menu(t_fdf *fdf, int r, int g, int b)
 {
 	double		i;
-	double		distance;
+	double		dist;
 	double		ratio;
-	int			X;
-	int			Y;
+	int			x;
+	int			y;
 
 	i = 0;
-	distance = sqrt(pow((fdf->d_x - fdf->o_x), 2) + pow((fdf->d_y - fdf->o_y), 2));
-	while (i < distance)
+	dist = sqrt(pow((fdf->d_x - fdf->o_x), 2) + pow((fdf->d_y - fdf->o_y), 2));
+	while (i < dist)
 	{
-		ratio = i / distance;
-		X = fdf->o_x + (fdf->d_x - fdf->o_x) * ratio;
-		Y = fdf->o_y + (fdf->d_y - fdf->o_y) * ratio;
+		ratio = i / dist;
+		x = fdf->o_x + (fdf->d_x - fdf->o_x) * ratio;
+		y = fdf->o_y + (fdf->d_y - fdf->o_y) * ratio;
 		if (X >= 0 && X < SCREEN_X && Y >= 0 && Y < SCREEN_Y)
-			pixel_put(fdf->pixel, X, Y, (b << 16) + (g << 8) + (r));
+			pixel_put(fdf->pixel, x, y, (b << 16) + (g << 8) + (r));
 		i += 0.1;
 	}
 	return (0);

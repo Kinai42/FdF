@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 06:36:47 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 07:01:16 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 #include "fdf.h"
 #include <math.h>
 
-
 void	coord(t_fdf *fdf)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	fdf->origin_x = ((SCREEN_X / 2) - (fdf->width / 2)) + 150;
@@ -37,11 +36,13 @@ int		print_line_x(t_fdf *fdf)
 	{
 		w = 0;
 		fdf->o_x = fdf->origin_x - (475 / pas * h);
-		fdf->o_y = fdf->origin_y + (399 / pas * h) - (fdf->zoom * fdf->tab[h][w]);
+		fdf->o_y = fdf->origin_y + (399 / pas * h) -
+			(fdf->zoom * fdf->tab[h][w]);
 		while (w < fdf->width - 1)
 		{
 			fdf->d_x = fdf->o_x + 475 / pas;
-			fdf->d_y = (fdf->o_y + 399 / pas) - (fdf->zoom * (fdf->tab[h][w + 1] - fdf->tab[h][w]));
+			fdf->d_y = (fdf->o_y + 399 / pas) -
+				(fdf->zoom * (fdf->tab[h][w + 1] - fdf->tab[h][w]));
 			get_colors_x(fdf, h, w);
 			fdf->o_x = fdf->d_x;
 			fdf->o_y = fdf->d_y;
@@ -64,11 +65,13 @@ int		print_line_y(t_fdf *fdf)
 	{
 		h = 0;
 		fdf->o_x = fdf->origin_x + (475 / pas * w);
-		fdf->o_y = fdf->origin_y + (399 / pas * w) - (fdf->zoom * fdf->tab[h][w]);
+		fdf->o_y = fdf->origin_y + (399 / pas * w) -
+			(fdf->zoom * fdf->tab[h][w]);
 		while (h < fdf->height - 1)
 		{
 			fdf->d_x = fdf->o_x - 475 / pas;
-			fdf->d_y = fdf->o_y + 399 / pas - (fdf->zoom * (fdf->tab[h + 1][w] - fdf->tab[h][w]));
+			fdf->d_y = fdf->o_y + 399 / pas -
+				(fdf->zoom * (fdf->tab[h + 1][w] - fdf->tab[h][w]));
 			get_colors_y(fdf, h, w);
 			fdf->o_x = fdf->d_x;
 			fdf->o_y = fdf->d_y;
@@ -83,18 +86,19 @@ int		draw_line(t_fdf *fdf, int r, int g, int b)
 	double		i;
 	double		distance;
 	double		ratio;
-	int			X;
-	int			Y;
+	int			x;
+	int			y;
 
 	i = 0;
-	distance = sqrt(pow((fdf->d_x - fdf->o_x), 2) + pow((fdf->d_y - fdf->o_y), 2));
+	distance = sqrt(pow((fdf->d_x - fdf->o_x), 2) +
+			pow((fdf->d_y - fdf->o_y), 2));
 	while (i < distance)
 	{
 		ratio = i / distance;
-		X = fdf->o_x + (fdf->d_x - fdf->o_x) * ratio;
-		Y = fdf->o_y + (fdf->d_y - fdf->o_y) * ratio;
+		x = fdf->o_x + (fdf->d_x - fdf->o_x) * ratio;
+		y = fdf->o_y + (fdf->d_y - fdf->o_y) * ratio;
 		if (X >= 350 && X < SCREEN_X && Y >= 0 && Y < SCREEN_Y)
-			pixel_put(fdf->pixel, X, Y, (b << 16) + (g << 8) + (r));
+			pixel_put(fdf->pixel, x, y, (b << 16) + (g << 8) + (r));
 		i += 0.1;
 	}
 	return (0);

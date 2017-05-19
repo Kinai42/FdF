@@ -6,14 +6,14 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 21:45:07 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 06:48:19 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 07:08:37 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 
-t_fdf	*ft_init(char *av)
+t_fdf		*ft_init(char *av)
 {
 	t_fdf	*fdf;
 
@@ -31,7 +31,7 @@ t_fdf	*ft_init(char *av)
 	return (fdf);
 }
 
-int				*insert_tab(int alt, int *tab, int size)
+int			*insert_tab(int alt, int *tab, int size)
 {
 	int		*new_tab;
 
@@ -43,7 +43,7 @@ int				*insert_tab(int alt, int *tab, int size)
 	return (new_tab);
 }
 
-int				ft_atoi_check(char *str)
+int			ft_atoi_check(char *str)
 {
 	int		result;
 	int		sign;
@@ -63,14 +63,14 @@ int				ft_atoi_check(char *str)
 		else
 		{
 			write(1, "invalid file\n", 13);
-			exit (0);
+			exit(0);
 		}
 		str++;
 	}
 	return (result * sign);
 }
 
-int				newline(t_fdf *fdf, char *line, int y)
+int			newline(t_fdf *fdf, char *line, int y)
 {
 	char	**tab_char;
 	int		alt_map;
@@ -90,7 +90,7 @@ int				newline(t_fdf *fdf, char *line, int y)
 	return (1);
 }
 
-t_fdf			*ft_setup(char *av)
+t_fdf		*ft_setup(char *av)
 {
 	t_fdf	*fdf;
 	int		fd;
@@ -100,7 +100,7 @@ t_fdf			*ft_setup(char *av)
 	y = 0;
 	if ((fd = open(av, O_RDONLY)) == -1 || !(fdf = ft_init(av)))
 	{
-		write (1,"error", 5);
+		write(1, "error", 5);
 		return (0);
 	}
 	if (!(fdf->tab = (int **)malloc(sizeof(int *) * fdf->height)))
