@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 07:01:16 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 18:31:18 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		draw_line(t_fdf *fdf, int r, int g, int b)
 		ratio = i / distance;
 		x = fdf->o_x + (fdf->d_x - fdf->o_x) * ratio;
 		y = fdf->o_y + (fdf->d_y - fdf->o_y) * ratio;
-		if (X >= 350 && X < SCREEN_X && Y >= 0 && Y < SCREEN_Y)
+		if (x >= 350 && x < SCREEN_X && y >= 0 && y < SCREEN_Y)
 			pixel_put(fdf->pixel, x, y, (b << 16) + (g << 8) + (r));
 		i += 0.1;
 	}

@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 19:42:09 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 06:55:35 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 18:30:04 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,17 @@
 
 # include <stdio.h>
 
-# define SCREEN_X 1250
-# define SCREEN_Y 1000
+/*
+** x 1250 y 1000
+*/
+# define SCREEN_X 800
+# define SCREEN_Y 700
 
 # define RED	0xff0000
 # define GREEN	0x00ff00
 # define BLUE	0x0000ff
+
+# define C 0x00FFFFFF
 
 typedef struct		s_fdf
 {
@@ -65,5 +70,7 @@ int					draw_line_menu(t_fdf *fdf, int r, int g, int b);
 void				pixel_put(char *pixel, int x, int y, int color);
 int					ft_height_map(char *av);
 void				ft_menu(t_fdf *fdf);
+void				ft_header2(t_fdf *fdf);
+int					ft_setup2(const int fd, char **line, t_fdf *fdf);
 
 #endif

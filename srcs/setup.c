@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 21:45:07 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 07:08:37 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 18:26:58 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,26 +95,19 @@ t_fdf		*ft_setup(char *av)
 	t_fdf	*fdf;
 	int		fd;
 	char	*line;
-	int		y;
 
-	y = 0;
-	if ((fd = open(av, O_RDONLY)) == -1 || !(fdf = ft_init(av)))
+	if ((fd = open(av, O_RDONLY)) == -1
+	|| !(fdf = ft_init(av)))
 	{
 		write(1, "error", 5);
 		return (0);
 	}
 	if (!(fdf->tab = (int **)malloc(sizeof(int *) * fdf->height)))
 		return (0);
-	while (get_next_line(fd, &line))
-	{
-		if (!newline(fdf, line, y))
-		{
-			write(1, "FdF: map invalid\n", 17);
-			return (0);
-		}
-		y++;
-		free(line);
-	}
+	ft_putchar('a');
+	if (!ft_setup2((const int)fd, &line, fdf))
+		return (0);
+	ft_putchar('a');
 	coord(fdf);
 	free(line);
 	!fdf->width ? write(1, "FdF: map invalid\n", 17) : 0;

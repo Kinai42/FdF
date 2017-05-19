@@ -6,7 +6,7 @@
 #    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/03 18:05:57 by dbauduin          #+#    #+#              #
-#    Updated: 2017/05/12 01:53:19 by dbauduin         ###   ########.fr        #
+#    Updated: 2017/05/19 18:22:25 by craffate         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ OBJ =	objs/main.o\
 		objs/ft_util.o\
 		objs/print_map.o\
 		objs/windows.o\
+		objs/norme.o\
 
 all: $(NAME)
 
