@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 21:45:07 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 04:18:29 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/19 06:48:19 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ int				ft_atoi_check(char *str)
 		if (*str >= '0' && *str <= '9')
 			result = result * 10 + *str - '0';
 		else
+		{
+			write(1, "invalid file\n", 13);
 			exit (0);
+		}
 		str++;
 	}
 	return (result * sign);
