@@ -6,11 +6,11 @@
 #    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/03 18:05:57 by dbauduin          #+#    #+#              #
-#    Updated: 2017/05/19 18:22:25 by craffate         ###   ########.fr        #
+#    Updated: 2017/05/26 23:32:25 by dbauduin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = FDF
+NAME = fdf
 
 OBJ =	objs/main.o\
 		objs/setup.o\

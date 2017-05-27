@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 21:45:07 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 18:58:25 by craffate         ###   ########.fr       */
+/*   Updated: 2017/05/27 01:59:16 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_fdf		*ft_init(char *av)
 		return (0);
 	fdf->width = 0;
 	fdf->height = ft_height_map(av);
-	fdf->zoom = 3;
+	fdf->zoom = 1;
 	fdf->theme = 1;
 	if (!(fdf->tab = (int **)malloc(sizeof(int *) * (fdf->height))))
 		return (0);
@@ -43,33 +43,6 @@ int			*insert_tab(int alt, int *tab, int size)
 	return (new_tab);
 }
 
-int			ft_atoi_check(char *str)
-{
-	int		result;
-	int		sign;
-
-	result = 0;
-	sign = 1;
-	if ((*str == '-' || *str == '+') && *(str + 1))
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str)
-	{
-		if (*str >= '0' && *str <= '9')
-			result = result * 10 + *str - '0';
-		else
-		{
-			write(1, "invalid file\n", 13);
-			exit(0);
-		}
-		str++;
-	}
-	return (result * sign);
-}
-
 int			newline(t_fdf *fdf, char *line, int y)
 {
 	char	**tab_char;
@@ -79,10 +52,12 @@ int			newline(t_fdf *fdf, char *line, int y)
 	i = 0;
 	if (!(tab_char = ft_strsplit(line, ' ')))
 		return (0);
+	if (fdf->width && fdf->width != ft_tablen(tab_char))
+		return (0);
 	fdf->width = ft_tablen(tab_char);
 	while (tab_char[i])
 	{
-		alt_map = ft_atoi_check(tab_char[i]);
+		alt_map = ft_atoi(tab_char[i]);
 		fdf->tab[y] = insert_tab(alt_map, fdf->tab[y], i);
 		free(tab_char[i++]);
 	}
@@ -97,7 +72,7 @@ t_fdf		*ft_setup(char *av)
 	char	*line;
 
 	if ((fd = open(av, O_RDONLY)) == -1
-	|| !(fdf = ft_init(av)))
+			|| !(fdf = ft_init(av)))
 	{
 		write(1, "error", 5);
 		return (0);
@@ -107,7 +82,6 @@ t_fdf		*ft_setup(char *av)
 	if (!ft_setup2((const int)fd, &line, fdf))
 		return (0);
 	coord(fdf);
-	free(line);
 	!fdf->width ? write(1, "FdF: map invalid\n", 17) : 0;
 	return (fdf->width ? fdf : 0);
 }

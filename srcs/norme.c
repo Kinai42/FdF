@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   norme.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/21 22:58:33 by dbauduin          #+#    #+#             */
+/*   Updated: 2017/05/27 01:11:05 by dbauduin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void		ft_header2(t_fdf *fdf)
@@ -26,7 +38,7 @@ void		ft_header2(t_fdf *fdf)
 	"    ###   ########");
 }
 
-int		ft_setup2(const int fd, char **line, t_fdf *fdf)
+int			ft_setup2(const int fd, char **line, t_fdf *fdf)
 {
 	int		y;
 
@@ -36,11 +48,9 @@ int		ft_setup2(const int fd, char **line, t_fdf *fdf)
 		if (!newline(fdf, *line, y))
 		{
 			write(1, "FdF: map invalid\n", 17);
-			return (0);
+			exit (0);
 		}
 		y++;
-		if (line)
-			free(line);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 18:31:18 by craffate         ###   ########.fr       */
+/*   Updated: 2017/05/27 01:57:28 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 void	coord(t_fdf *fdf)
 {
 	int	i;
+	float	pas;
 
 	i = 0;
-	fdf->origin_x = ((SCREEN_X / 2) - (fdf->width / 2)) + 150;
+	pas = fdf->width;
+	fdf->height > fdf->width ? pas = fdf->height : 0;
+	fdf->origin_x = (SCREEN_X / pas / 2) * fdf->height + 180;
 	fdf->origin_y = 50;
 }
 
@@ -27,7 +30,7 @@ int		print_line_x(t_fdf *fdf)
 {
 	int		h;
 	int		w;
-	int		pas;
+	float	pas;
 
 	h = -1;
 	pas = fdf->width;
@@ -56,7 +59,7 @@ int		print_line_y(t_fdf *fdf)
 {
 	int		h;
 	int		w;
-	int		pas;
+	float		pas;
 
 	w = -1;
 	pas = fdf->width;

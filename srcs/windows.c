@@ -6,12 +6,11 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 01:30:26 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 18:41:13 by craffate         ###   ########.fr       */
+/*   Updated: 2017/05/22 04:29:40 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 void		start_fdf(t_fdf *fdf, double zoom, int x, int y)
 {
@@ -57,7 +56,7 @@ void		ft_menu(t_fdf *fdf)
 	}
 	fdf->o_x = 0;
 	fdf->o_y = 25;
-	fdf->d_x = 400;
+	fdf->d_x = 320;
 	fdf->d_y = 25;
 	draw_line_menu(fdf, 255, 255, 255);
 }

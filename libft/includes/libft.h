@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 03:06:30 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/11 23:58:37 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/27 02:06:08 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 9000
 
 typedef struct		s_slot
 {

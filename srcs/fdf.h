@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 19:42:09 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/19 18:30:04 by craffate         ###   ########.fr       */
+/*   Updated: 2017/05/27 01:57:26 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 /*
 ** x 1250 y 1000
 */
-# define SCREEN_X 800
-# define SCREEN_Y 700
+# define SCREEN_X 1550
+# define SCREEN_Y 1200
 
 # define RED	0xff0000
 # define GREEN	0x00ff00
@@ -35,14 +35,14 @@ typedef struct		s_fdf
 	int				**tab;
 	int				width;
 	int				height;
-	double			o_x;
-	double			o_y;
-	double			d_x;
-	double			d_y;
-	double			zoom;
+	float			o_x;
+	float			o_y;
+	float			d_x;
+	float			d_y;
+	float			zoom;
 	int				theme;
-	int				origin_x;
-	int				origin_y;
+	float			origin_x;
+	float			origin_y;
 	void			*mlx;
 	void			*win;
 	char			*pixel;
