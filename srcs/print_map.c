@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/27 01:57:28 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/27 02:18:54 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	coord(t_fdf *fdf)
 {
-	int	i;
+	int		i;
 	float	pas;
 
 	i = 0;
@@ -57,8 +57,8 @@ int		print_line_x(t_fdf *fdf)
 
 int		print_line_y(t_fdf *fdf)
 {
-	int		h;
-	int		w;
+	int			h;
+	int			w;
 	float		pas;
 
 	w = -1;
