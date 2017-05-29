@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 13:58:01 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/05/30 01:18:53 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/30 01:25:42 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	coord(t_fdf *fdf)
 	i = 0;
 	pas = fdf->width;
 	fdf->height > fdf->width ? pas = fdf->height : 0;
-	fdf->origin_x = (SCREEN_X / pas / 2) * fdf->height + 380;
+	fdf->origin_x = (SCREEN_X / pas / 2) * fdf->height + 300;
 	fdf->origin_y = 50;
 }
 
